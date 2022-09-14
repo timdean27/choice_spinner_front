@@ -6,7 +6,7 @@ const ChoicesAPI = () => {
 
   const grabChoices = () => {
     console.log("grabFoodDataFunc ran");
-    const REACT_APP_DATABASE_URL_DJANGO = "http://127.0.0.1:8000/api/choices/";
+    const REACT_APP_DATABASE_URL_DJANGO = process.env.REACT_APP_DATABASE_URL_DJANGO;
     // const loginEndpoint = "gfoods_view_protected/";
     const headers = {
       headers: {
@@ -25,17 +25,24 @@ const ChoicesAPI = () => {
     grabChoices();
   }, []);
 
-  const loadDate = () => {
+  const loadedDate = () => {
     return ( <div className="choices_div">
     {choices.map((choice, index) => (
       <h3 key={index}>{choice.body}</h3>
     ))}
   </div>)
   }
-  console.log(choices)
+
+  const loadingData = () => {
+    return <h1>Loading Data...</h1>
+  }
+
+
+  console.log(choices[0])
+
   return (
     <div>
-        {choices[0].body ? loadDate() : <h1>Lodaing Data...</h1> }
+        {choices[0] ? loadedDate() : loadingData() }
    </div>
   );
 
