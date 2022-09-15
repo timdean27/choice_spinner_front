@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
 import axios from "axios";
+
+import ListChoices from "../pages/ListChoices"
 
 const ChoicesAPI = () => {
   const [choices, setChoices] = useState([]);
@@ -28,7 +31,7 @@ const ChoicesAPI = () => {
   const loadedDate = () => {
     return ( <div className="choices_div">
     {choices.map((choice, index) => (
-      <h3 key={index}>{choice.body}</h3>
+      <ListChoices key={index} choice={choice} />
     ))}
   </div>)
   }
