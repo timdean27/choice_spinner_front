@@ -30,9 +30,8 @@ const ChoicesAPI = () => {
 
   const loadedDate = () => {
     return ( <div className="choices_div">
-    {choices.map((choice, index) => (
-      <ListChoices key={index} choice={choice} />
-    ))}
+      <ListChoices choices={choices} />
+
   </div>)
   }
 
