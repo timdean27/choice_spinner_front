@@ -35,10 +35,11 @@ const SingleChoice = (props) => {
   // updateing a single chocie
   const handleChange = (e) => {
     setChoice({ ...choice, [e.target.id]: e.target.value });
+    console.warn(e.target.value)
   };
 
   const updateChoice = () => {
-    console.log("update fucntion ran",choice.body)
+    console.log("update function ran",choice.body)
     const REACT_APP_DATABASE_URL_DJANGO =
       process.env.REACT_APP_DATABASE_URL_DJANGO;
       const Endpoint = `${id}/update`;
@@ -58,20 +59,44 @@ const SingleChoice = (props) => {
   }
 
 
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // deleting a single chocie
+
+  const deleteChoice = () => {
+    console.log("delete function ran",choice.body)
+    const REACT_APP_DATABASE_URL_DJANGO =
+      process.env.REACT_APP_DATABASE_URL_DJANGO;
+      const Endpoint = `${id}/delete`;
+
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    axios.delete(REACT_APP_DATABASE_URL_DJANGO + Endpoint, choice, headers);
+    navigate("/")
+  };
+
+
+
+
   // rendering to the page
   const loadedData = () => {
     return (
       <div>
           <button onClick={handleSubmit}>Update & Back</button>
         <h3>Single Choice Page showing ID={choice.body}</h3>
-        <form>
+        <form onSubmit={handleSubmit}>
           <input
             id="body"
             type="text"
-            placeholder={choice.body}
+            value={choice.body}
+            placeholder="Enter Option"
             onChange={handleChange}
           />
         </form>
+        <button onClick={deleteChoice}>Delete Choice</button>
       </div>
     );
   };
