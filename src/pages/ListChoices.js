@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const ListChoices = ({choice}) => {
-  console.log(choice);
-  return (
+const ListChoices = ({ choices }) => {
+  console.log(choices);
 
-    <div>
-    <h1>Printing from List Choices Page</h1>
-    <Link to={`/choice/${choice.id}`}>{choice.body}</Link>
+  const loadedData = () => {
+    return (
+      <div>
+      <ul>
+        {choices.map((choice, index) => (
+          <li key={index}><Link  to={`/choice/${choice.id}`}>
+            {choice.body}
+          </Link>
+          </li>
+        ))}
+        </ul>
+      </div>
+    );
+  };
 
-    </div>
-  )
-}
+  const loadingData = () => {
+    return <h3>Awaiting Data</h3>;
+  };
 
-export default ListChoices
+  return <div>{!choices ? loadingData() : loadedData()}</div>;
+};
+
+export default ListChoices;
