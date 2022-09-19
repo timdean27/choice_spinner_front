@@ -8,7 +8,7 @@ const ChoicesAPI = () => {
   const [choices, setChoices] = useState([]);
 
   const grabChoices = () => {
-    console.log("grabFoodDataFunc ran");
+    console.log("get choices Axios ran");
     const REACT_APP_DATABASE_URL_DJANGO = process.env.REACT_APP_DATABASE_URL_DJANGO;
     // const loginEndpoint = "gfoods_view_protected/";
     const headers = {

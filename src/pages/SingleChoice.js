@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Link,useNavigate } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 
 const SingleChoice = (props) => {
   let { id } = useParams();
@@ -17,7 +17,7 @@ const SingleChoice = (props) => {
   const grabChoice = () => {
     const REACT_APP_DATABASE_URL_DJANGO =
       process.env.REACT_APP_DATABASE_URL_DJANGO;
-      const Endpoint = `${id}`;
+      const Endpoint = `view/${id}`;
 
     const headers = {
       headers: {
@@ -42,7 +42,7 @@ const SingleChoice = (props) => {
     console.log("update function ran",choice.body)
     const REACT_APP_DATABASE_URL_DJANGO =
       process.env.REACT_APP_DATABASE_URL_DJANGO;
-      const Endpoint = `${id}/update`;
+      const Endpoint = `view/${id}/update`;
 
     const headers = {
       headers: {
@@ -52,12 +52,11 @@ const SingleChoice = (props) => {
     axios.put(REACT_APP_DATABASE_URL_DJANGO + Endpoint, choice, headers);
   };
 
-
   const handleSubmit =() => {
-    updateChoice()
+    if(!choice.body) {deleteChoice()}
+    else{updateChoice()}
     navigate("/")
   }
-
 
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +66,7 @@ const SingleChoice = (props) => {
     console.log("delete function ran",choice.body)
     const REACT_APP_DATABASE_URL_DJANGO =
       process.env.REACT_APP_DATABASE_URL_DJANGO;
-      const Endpoint = `${id}/delete`;
+      const Endpoint = `view/${id}/delete`;
 
     const headers = {
       headers: {
@@ -77,6 +76,8 @@ const SingleChoice = (props) => {
     axios.delete(REACT_APP_DATABASE_URL_DJANGO + Endpoint, choice, headers);
     navigate("/")
   };
+
+
 
 
 
@@ -92,7 +93,7 @@ const SingleChoice = (props) => {
             id="body"
             type="text"
             value={choice.body}
-            placeholder="Enter Option"
+            placeholder={choice.body}
             onChange={handleChange}
           />
         </form>
