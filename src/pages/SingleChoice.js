@@ -52,12 +52,11 @@ const SingleChoice = (props) => {
     axios.put(REACT_APP_DATABASE_URL_DJANGO + Endpoint, choice, headers);
   };
 
-
   const handleSubmit =() => {
-    updateChoice()
+    if(!choice.body) {deleteChoice()}
+    else{updateChoice()}
     navigate("/")
   }
-
 
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -81,6 +80,8 @@ const SingleChoice = (props) => {
 
 
 
+
+
   // rendering to the page
   const loadedData = () => {
     return (
@@ -92,7 +93,7 @@ const SingleChoice = (props) => {
             id="body"
             type="text"
             value={choice.body}
-            placeholder="Enter Option"
+            placeholder={choice.body}
             onChange={handleChange}
           />
         </form>

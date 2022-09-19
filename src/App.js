@@ -10,7 +10,7 @@ function App() {
     <Header/>
     <Routes>
       <Route path="/" element={<Choices/>}/>
-      <Route path="/choice/new" element={<AddChoiceLogic/>}/>
+      <Route path="/choice/create" element={<AddChoiceLogic/>}/>
       <Route path="/choice/view/:id" element={<SingleChoice/>}/>
     </Routes>
     </div>

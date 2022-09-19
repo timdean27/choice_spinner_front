@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const AddChoice = () => {
   return (
     <div>
-      <Link to={`/choice/new`}>
+      <Link to={`/choice/create`}>
         <button>Add Choice</button>
       </Link>
     </div>
