@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AddChoice from "../components/AddChoice"
+import AddChoiceLogic from "./AddChoiceLogic"
 const ListChoices = ({ choices }) => {
-  console.log(choices);
+  console.log("pritinging at top of list pager", choices);
+  const [addChoice, setaddChoice] = useState(false);
 
+
+  const clickedAddChoice = () => {
+    setaddChoice(true);
+  }
+
+////////////////////////////////
+//rendering page
   const loadedData = () => {
     return (
       <div>
@@ -18,7 +26,7 @@ const ListChoices = ({ choices }) => {
         ))}
         </ul>
       </div>
-      <AddChoice/>
+      {!addChoice ?<button onClick={clickedAddChoice}>Add Choice</button> :<AddChoiceLogic setaddChoice={setaddChoice}/>}
       </div>
     );
   };

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
 
-const AddChoicelogic = () => {
-  const navigate = useNavigate();
+
+const AddChoicelogic = ({setaddChoice}) => {
+
   const [choice, setChoice] = useState(null);
 
   // creat choice Post to API
@@ -29,15 +29,12 @@ const AddChoicelogic = () => {
 
   const handleSubmit = () => {
     createChoice();
-    navigate("/");
+    setaddChoice(false)
   };
-  const backFunction = () => {
-    navigate("/");
-  };
+
 
   return (
     <div>
-      <button onClick={backFunction}>Back</button>
       <button onClick={handleSubmit}>Create Choice</button>
       <form onSubmit={handleSubmit}>
         <input

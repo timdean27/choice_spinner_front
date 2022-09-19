@@ -77,11 +77,6 @@ const SingleChoice = (props) => {
     navigate("/")
   };
 
-
-
-
-
-
   // rendering to the page
   const loadedData = () => {
     return (
