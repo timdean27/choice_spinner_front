@@ -17,18 +17,20 @@ const SingleChoice = (props) => {
   const grabChoice = () => {
     const REACT_APP_DATABASE_URL_DJANGO =
       process.env.REACT_APP_DATABASE_URL_DJANGO;
-      const Endpoint = `view/${id}`;
-
+      const Endpoint = `${id}`;
+    const method = 'GET';
     const headers = {
       headers: {
         "Content-Type": "application/json",
       },
     };
 
-    axios.get(REACT_APP_DATABASE_URL_DJANGO + Endpoint, headers).then((res) => {
+    axios.get(REACT_APP_DATABASE_URL_DJANGO + Endpoint, headers, method).then((res) => {
       console.log("data insisde DjGfood fetch", res.data);
       setChoice(res.data);
-    });
+    }).catch(function(error) {
+      console.log(error.response.data);
+    });;
   };
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -42,14 +44,16 @@ const SingleChoice = (props) => {
     console.log("update function ran",choice.body)
     const REACT_APP_DATABASE_URL_DJANGO =
       process.env.REACT_APP_DATABASE_URL_DJANGO;
-      const Endpoint = `view/${id}/update`;
-
+      const Endpoint = `${id}/`;
+      const method = 'PUT';
     const headers = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-    axios.put(REACT_APP_DATABASE_URL_DJANGO + Endpoint, choice, headers);
+    axios.put(REACT_APP_DATABASE_URL_DJANGO + Endpoint, choice, headers, method).catch(function(error) {
+      console.log(error.response.data);
+    });
   };
 
   const handleSubmit =() => {
@@ -66,14 +70,16 @@ const SingleChoice = (props) => {
     console.log("delete function ran",choice.body)
     const REACT_APP_DATABASE_URL_DJANGO =
       process.env.REACT_APP_DATABASE_URL_DJANGO;
-      const Endpoint = `view/${id}/delete`;
-
+      const Endpoint = `${id}`;
+      const method = 'DELETE'
     const headers = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-    axios.delete(REACT_APP_DATABASE_URL_DJANGO + Endpoint, choice, headers);
+    axios.delete(REACT_APP_DATABASE_URL_DJANGO + Endpoint, choice, headers,method).catch(function(error) {
+      console.log(error.response.data);
+    });;
     navigate("/")
   };
 

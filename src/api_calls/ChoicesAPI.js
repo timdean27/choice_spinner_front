@@ -21,7 +21,9 @@ const ChoicesAPI = () => {
     axios.get(REACT_APP_DATABASE_URL_DJANGO, headers).then((res) => {
       console.log("data insisde main GET choicesAPI", res.data);
       setChoices(res.data);
-    });
+    }).catch(function(error) {
+      console.log(error.response.data);
+    });;
   };
 
   useEffect(() => {
