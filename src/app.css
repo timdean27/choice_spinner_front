@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+Wheel component
+ .wheel-list{
+  background-color: blue;
+}
+
+.inner-wheel-div{
+  color: black;
+}

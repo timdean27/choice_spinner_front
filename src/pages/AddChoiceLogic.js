@@ -11,14 +11,14 @@ const AddChoicelogic = ({ setaddChoice, mainAPIGet }) => {
     console.log("creat function ran");
     const REACT_APP_DATABASE_URL_DJANGO =
       process.env.REACT_APP_DATABASE_URL_DJANGO;
-    const Endpoint = `create`;
-
+    // const Endpoint = `create`;
+    const method = 'POST'
     const headers = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-    axios.post(REACT_APP_DATABASE_URL_DJANGO + Endpoint, choice, headers);
+    axios.post(REACT_APP_DATABASE_URL_DJANGO, choice, headers, method);
   };
 
   const handleChange = (e) => {

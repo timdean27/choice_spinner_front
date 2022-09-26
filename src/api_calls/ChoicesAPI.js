@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 
 import ListChoices from "../pages/ListChoices"
-
+import Wheel from "../components/Wheel"
 const ChoicesAPI = () => {
   const [choices, setChoices] = useState([]);
 
@@ -21,7 +21,9 @@ const ChoicesAPI = () => {
     axios.get(REACT_APP_DATABASE_URL_DJANGO, headers).then((res) => {
       console.log("data insisde main GET choicesAPI", res.data);
       setChoices(res.data);
-    });
+    }).catch(function(error) {
+      console.log(error.response.data);
+    });;
   };
 
   useEffect(() => {
@@ -29,10 +31,16 @@ const ChoicesAPI = () => {
   }, []);
 
   const loadedDate = () => {
-    return ( <div className="choices_div">
+    return ( 
+      <div className="Home_PAGE">
+      <div className="choices_homepage">
       <ListChoices choices={choices} mainAPIGet={grabChoices} />
-
-  </div>)
+      </div>
+      <div className="wheel_homepage">
+      <Wheel choices={choices} mainAPIGet={grabChoices} />
+      </div>
+      </div>
+  )
   }
 
   const loadingData = () => {
