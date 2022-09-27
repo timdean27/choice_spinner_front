@@ -13,11 +13,20 @@ code {
 }
 
 
-Wheel component
- .wheel-list{
-  background-color: blue;
-}
+/* .mainbox{
+  position: relative;
+  width: 300px;
+  height: 300px;
+} */
 
-.inner-wheel-div{
-  color: black;
+.circle {
+  width: 18em;
+  height: 18em;
+  border: 10px solid #ccc;
+  position: relative;
+  padding: 0;
+  margin: 1em auto;
+  border-radius: 50%;
+  list-style: none;
+  overflow: hidden;
 }
