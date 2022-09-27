@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../app.css";
 const Wheel = ({ choices }) => {
   const colorMap = {};
   const selectedColors = {};
@@ -12,7 +12,7 @@ const Wheel = ({ choices }) => {
       let value = arrayOfColorFunctions[index];
       randomColorString += value;
     }
-    console.log(randomColorString);
+    // console.log("randomColorString", randomColorString);
     return randomColorString;
   };
 
@@ -30,22 +30,35 @@ const Wheel = ({ choices }) => {
     // Return next new color
     return newColor;
   };
+
+  const rotateFunc = (index) => {
+    return `rotate(${index * 30}deg)`;
+  };
+
+  const widthFunc = (index) => {
+    return (`${50}%`);
+  };
+
   const wheelStyles = (index) => {
-    return ({
+    return {
       backgroundColor: newColorFind(index),
       color: "blue",
-      transform: 'rotate(0deg) skew(-60deg)'
-    });
+      transform: `${rotateFunc(index)} skewY(${-60}deg)`,
+      overflow: "hidden",
+      position: "absolute",
+      top: "0",
+      right: "0",
+      width: widthFunc(index),
+      transformOrigin: `${0}% ${100}%`
+    };
   };
 
   return (
-    <div>
-      <ul className="wheel-list">
+    <div className="mainbox">
+      <ul className="circle">
         {choices.map((choice, index) => (
-          <li className={"wheel-list-item" + index} key={index}>
-            <div className="inner-wheel-div" style={wheelStyles(index)}>
-              {choice.body}
-            </div>
+          <li className="wheelSpan" key={index} style={wheelStyles(index)}>
+            {choice.body}
           </li>
         ))}
       </ul>
