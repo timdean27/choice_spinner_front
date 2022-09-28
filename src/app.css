@@ -32,6 +32,7 @@ code {
 }
 
 .option-text{
-  width:200em;
+  font-size: 12px;
+  width: 200%;
   height: 200%;
 }
