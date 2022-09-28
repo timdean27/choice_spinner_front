@@ -30,3 +30,8 @@ code {
   list-style: none;
   overflow: hidden;
 }
+
+.option-text{
+  width:200em;
+  height: 200%;
+}

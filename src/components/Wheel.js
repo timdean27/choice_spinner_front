@@ -46,7 +46,7 @@ const Wheel = ({ choices }) => {
       transform: `${rotateFunc(index)} skewY(${-60}deg)`,
       overflow: "hidden",
       position: "absolute",
-      top: "0",
+      top: "30%",
       right: "0",
       width: widthFunc(index),
       transformOrigin: `${0}% ${100}%`
@@ -58,7 +58,7 @@ const Wheel = ({ choices }) => {
       <ul className="circle">
         {choices.map((choice, index) => (
           <li className="wheelSpan" key={index} style={wheelStyles(index)}>
-            {choice.body}
+            <p className="option-text">{choice.body}</p>
           </li>
         ))}
       </ul>
