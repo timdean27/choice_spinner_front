@@ -42,7 +42,6 @@ const Wheel = ({ choices }) => {
   const wheelStyles = (index) => {
     return {
       backgroundColor: newColorFind(index),
-      color: "blue",
       transform: `${rotateFunc(index)} skewY(${-60}deg)`,
       overflow: "hidden",
       position: "absolute",
