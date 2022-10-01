@@ -4,6 +4,8 @@ import axios from "axios";
 
 import ListChoices from "../pages/ListChoices"
 import Wheel from "../components/Wheel"
+import BarChart from '../components/BarChart';
+
 const ChoicesAPI = () => {
   const [choices, setChoices] = useState([]);
 
@@ -38,6 +40,7 @@ const ChoicesAPI = () => {
       </div>
       <div className="wheel_homepage">
       <Wheel choices={choices} mainAPIGet={grabChoices} />
+      <BarChart/>
       </div>
       </div>
   )
