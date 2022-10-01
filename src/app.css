@@ -19,7 +19,7 @@ code {
   height: 300px;
 } */
 
-.circle {
+.wheel {
   width: 18em;
   height: 18em;
   border: 10px solid #ccc;
@@ -45,4 +45,24 @@ code {
   position: absolute;
   left: 50%;
   z-index: 1;
+}
+
+.spin-button{
+  position: absolute;
+  left: 40%;
+  width: 120px;
+  height: 40px;
+}
+
+.start-roate{
+  animation: start-roate 1s linear infinite;
+}
+@keyframes start-roate {
+  100%{
+    transform: rotate(360deg)
+  }
+}
+
+.stop-roate{
+  animation-play-state: paused;
 }
