@@ -61,6 +61,7 @@ const Wheel = ({ choices }) => {
     setNameRotate("wheel start-roate")
     setTimeout(() =>{
       setNameRotate("wheel stop-roate")
+      
       // Math.random() * (max - min) + min;
     }, Math.floor(Math.random() * (5000 - 2000) + 2000))
   }
