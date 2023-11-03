@@ -12,9 +12,11 @@ const Home = () => {
     try {
       const response = await axios.get(CHOICES_API_ENDPOINT);
       setChoices(response.data);
+      console.log(choices, "After fetch in home page")
     } catch (error) {
       console.error("Error fetching choices:", error);
     }
+    
   };
 
   useEffect(() => {
