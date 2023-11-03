@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const AddChoiceForm = ({ mainAPIGet }) => {
+const AddChoiceForm = ({ CHOICES_API_ENDPOINT, onChoiceAdded }) => {
   const [newChoice, setNewChoice] = useState("");
-  const CHOICES_API_ENDPOINT = "http://localhost:8000/api/choices"; 
-
+  console.log(CHOICES_API_ENDPOINT)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const choiceData = { body: newChoice };
-
+    console.log(choiceData)
     try {
       // Send a POST request to add the new choice to Django
       await axios.post(CHOICES_API_ENDPOINT, choiceData);
 
       // After successful creation, update the choices list
-      mainAPIGet();
+      onChoiceAdded();
 
       // Clear the input field
       setNewChoice("");
@@ -38,3 +37,4 @@ const AddChoiceForm = ({ mainAPIGet }) => {
 };
 
 export default AddChoiceForm;
+
