@@ -1,0 +1,36 @@
+.choice-spinner {
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.spinner-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
+  transform: rotate(0deg);
+  transition: transform 3s ease-in-out;
+}
+
+.spinner-choice {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #2196F3; /* Default color */
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transform-origin: center;
+}
+
+.spinner-choice.selected {
+  background-color: #FF5722; /* Color for the selected choice */
+}
+
+.spin {
+  transform: rotate(720deg); /* Number of spins (adjust as needed) */
+}

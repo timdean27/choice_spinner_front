@@ -1,17 +1,17 @@
+// AddChoiceForm.js
 import React, { useState } from "react";
 import axios from "axios";
 
-const AddChoiceForm = ({ CHOICES_API_ENDPOINT, onChoiceAdded }) => {
+const AddChoiceForm = ({ onChoiceAdded }) => {
   const [newChoice, setNewChoice] = useState("");
-  console.log(CHOICES_API_ENDPOINT)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const choiceData = { body: newChoice };
-    console.log(choiceData)
+
     try {
-      // Send a POST request to add the new choice to Django
-      await axios.post(CHOICES_API_ENDPOINT, choiceData);
+      await axios.post("http://localhost:8000/api/choices/", choiceData);
 
       // After successful creation, update the choices list
       onChoiceAdded();
@@ -37,4 +37,3 @@ const AddChoiceForm = ({ CHOICES_API_ENDPOINT, onChoiceAdded }) => {
 };
 
 export default AddChoiceForm;
-
