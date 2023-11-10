@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
-import "../styles/ChoiceWheel.css"; // Create a CSS file for styling
+import "../styles/ChoiceWheel.css"; // Import the CSS file for styling
 
-const ChoiceWheel = ({ choices, onChoiceSelected }) => {
+const ChoiceSpinner = ({ choices, onChoiceSelected }) => {
   const [spinning, setSpinning] = useState(false);
   const [selectedChoice, setSelectedChoice] = useState(null);
 
-  const spinWheel = () => {
+  const spinSpinner = () => {
     setSpinning(true);
 
-    // Simulate spinning for 10 seconds
+    // Simulate spinning for a few seconds
     setTimeout(() => {
       const randomIndex = Math.floor(Math.random() * choices.length);
       setSelectedChoice(choices[randomIndex]);
       setSpinning(false);
       onChoiceSelected(choices[randomIndex]);
-    }, 10000);
+    }, 10000); // Spin for 10 seconds
   };
 
   useEffect(() => {
@@ -22,25 +22,23 @@ const ChoiceWheel = ({ choices, onChoiceSelected }) => {
   }, [choices]);
 
   return (
-    <div className={`choice-wheel ${spinning ? "spinning" : ""}`}>
-      <div className="wheel">
+    <div className={`choice-spinner ${spinning ? "spinning" : ""}`}>
+      <div className="spinner-inner">
         {choices.map((choice, index) => (
           <div
             key={choice.id}
-            className={`choice ${index === 0 ? "selected" : ""}`}
-            style={{
-              transform: `rotate(${(360 / choices.length) * index}deg)`,
-            }}
+            className={`spinner-choice ${choice === selectedChoice ? "selected" : ""}`}
+            style={{ transform: `rotate(${(360 / choices.length) * index}deg)` }}
           >
             {choice.body}
           </div>
         ))}
       </div>
-      <button onClick={spinWheel} disabled={spinning}>
+      <button onClick={spinSpinner} disabled={spinning}>
         Spin
       </button>
     </div>
   );
 };
 
-export default ChoiceWheel;
+export default ChoiceSpinner;
