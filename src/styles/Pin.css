@@ -1,0 +1,19 @@
+/* Pin.css */
+
+.pin-container {
+    position: relative;
+    top: -3px; /* Adjust the distance above the circle as needed */
+  }
+  
+  .pin {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent; /* Adjust the size as needed */
+    border-right: 10px solid transparent; /* Adjust the size as needed */
+    border-top: 20px solid red; /* Adjust the size and color as needed */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  

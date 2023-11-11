@@ -1,11 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import "../styles/ChoiceWheel.css";
+import Pin from "./Pin";
 
 const ChoiceSpinner = ({ choices }) => {
   const pieChartRef = useRef(null);
   const width = 300;
   const height = 300;
+  const [time, setTime] = useState(null);
 
   useEffect(() => {
     createPieChart();
@@ -73,8 +75,9 @@ const ChoiceSpinner = ({ choices }) => {
     // Update the timer display every second
     const timerInterval = setInterval(() => {
       starttime--;
+      setTime(starttime);
       updateTimer(starttime);
-  
+
       // Stop the interval when the duration reaches 0
       if (starttime <= 0) {
         clearInterval(timerInterval);
@@ -108,7 +111,9 @@ const ChoiceSpinner = ({ choices }) => {
   return (
     <div>
       <h1>ChoiceWheel</h1>
+      {time !== null && <h2>Time remaining: {time} seconds</h2>}
       <button onClick={spinWheel}>Spin Wheel</button>
+      <Pin></Pin>
       <div className="choice-spinner" ref={pieChartRef}></div>
     </div>
   );
