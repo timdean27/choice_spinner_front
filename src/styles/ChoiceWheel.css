@@ -1,0 +1,27 @@
+.choice-spinner {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 20px auto;
+  border-radius: 50%;
+  border: 2px solid #000; /* Border for the circle */
+  overflow: hidden;
+}
+
+svg {
+  display: block;
+}
+
+.pie-slice {
+  stroke: #000000; /* Border color for each slice */
+  stroke-width: 2px; /* Border width for each slice */
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Additional styles as needed */

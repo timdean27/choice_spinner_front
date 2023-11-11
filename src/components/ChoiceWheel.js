@@ -3,48 +3,39 @@ import * as d3 from "d3";
 import "../styles/ChoiceWheel.css";
 
 const ChoiceSpinner = ({ choices }) => {
-  // Create a ref to hold the reference to the pie chart container
   const pieChartRef = useRef(null);
+  const width = 300;
+  const height = 300;
 
-  // useEffect hook to trigger the creation of the pie chart when choices change
   useEffect(() => {
     createPieChart();
   }, [choices]);
 
-  // Function to create the pie chart using D3
   const createPieChart = () => {
-    // Remove any existing elements inside the pie chart container
+    // Remove existing pie chart
     d3.select(pieChartRef.current).selectAll("*").remove();
 
-    // Set up dimensions for the pie chart
-    const width = 300;
-    const height = 300;
     const radius = Math.min(width, height) / 2;
 
-    // Create an SVG element and append it to the pie chart container
     const svg = d3.select(pieChartRef.current).append("svg")
       .attr("width", width)
       .attr("height", height)
       .append("g")
       .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
-    // Extract data for the pie chart (length of choice names)
     const data = choices.map((choice) => choice.body.length);
 
-    // Create a color scale based on the choice names
     const colorScale = d3.scaleOrdinal()
       .domain(choices.map((choice) => choice.body))
       .range(d3.schemeCategory10);
 
-    // Create a D3 pie function
     const pie = d3.pie();
 
-    // Create a D3 arc function to define the shape of each slice
     const arc = d3.arc()
       .innerRadius(0)
       .outerRadius(radius);
 
-    // Append slices to the SVG
+    // Append slices
     svg.selectAll("path")
       .data(pie(data))
       .enter()
@@ -64,11 +55,60 @@ const ChoiceSpinner = ({ choices }) => {
       .text((d, i) => choices[i].body);
   };
 
-  // Render the component
+  const spinWheel = () => {
+    // Generate random current rotation
+    let currentRotation = Math.floor(Math.random() * 360);
+  
+    // Generate random number of rotations (between 5 and 25)
+    const rotations = Math.floor(Math.random() * 21) + 5;
+  
+    // Calculate the final rotation by adding the current rotation and a full rotation (360)
+    const finalRotation = currentRotation + 360 * rotations;
+  
+    // Generate a random duration between 10 to 20 seconds
+    const duration = Math.floor(Math.random() * 11) + 10;
+  
+
+    let starttime = duration
+    // Update the timer display every second
+    const timerInterval = setInterval(() => {
+      starttime--;
+      updateTimer(starttime);
+  
+      // Stop the interval when the duration reaches 0
+      if (starttime <= 0) {
+        clearInterval(timerInterval);
+      }
+    }, 1000);
+  
+    // Rotate the wheel using d3.transition
+    d3.select(pieChartRef.current)
+      .select("svg")
+      .transition()
+      .duration(duration * 1000) // Convert duration to milliseconds
+      .tween("rotate", function () {
+        // Interpolate between the current rotation and the final rotation
+        const i = d3.interpolate(currentRotation, finalRotation);
+  
+        // Return a function that will be called for each step of the transition
+        return function (t) {
+          // Rotate the wheel by updating the transform attribute
+          d3.select(pieChartRef.current)
+            .select("g")
+            .attr("transform", `translate(${width / 2}, ${height / 2}) rotate(${i(t)})`);
+        };
+      });
+  };
+  
+  const updateTimer = (time) => {
+    // Display the timer (You can replace this with your preferred way of updating the timer in the UI)
+    console.log(`Time remaining: ${time} seconds`);
+  };
+
   return (
     <div>
       <h1>ChoiceWheel</h1>
-      {/* Attach the pie chart container to the ref */}
+      <button onClick={spinWheel}>Spin Wheel</button>
       <div className="choice-spinner" ref={pieChartRef}></div>
     </div>
   );
