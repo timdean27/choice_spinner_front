@@ -64,20 +64,23 @@ const ChoiceSpinner = ({ choices }) => {
     // Generate random number of rotations (between 5 and 25)
     const rotations = Math.floor(Math.random() * 21) + 5;
   
-    // Calculate the final rotation by adding the current rotation and a full rotation (360)
-    const finalRotation = currentRotation + 360 * rotations;
+    // Generate a random offset for the final rotation (between 0 and 360)
+    const rotationOffset = Math.floor(Math.random() * 361);
+  
+    // Calculate the final rotation by adding the rotations and the offset
+    const finalRotation = currentRotation + 360 * rotations + rotationOffset;
   
     // Generate a random duration between 10 to 20 seconds
     const duration = Math.floor(Math.random() * 11) + 10;
   
-
-    let starttime = duration
+    let starttime = duration;
+  
     // Update the timer display every second
     const timerInterval = setInterval(() => {
       starttime--;
       setTime(starttime);
       updateTimer(starttime);
-
+  
       // Stop the interval when the duration reaches 0
       if (starttime <= 0) {
         clearInterval(timerInterval);
@@ -102,6 +105,7 @@ const ChoiceSpinner = ({ choices }) => {
         };
       });
   };
+  
   
   const updateTimer = (time) => {
     // Display the timer (You can replace this with your preferred way of updating the timer in the UI)
