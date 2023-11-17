@@ -113,12 +113,14 @@ const ChoiceSpinner = ({ choices }) => {
   };
 
   return (
-    <div>
-      <h1>ChoiceWheel</h1>
-      {time !== null && <h2>Time remaining: {time} seconds</h2>}
-      <button onClick={spinWheel}>Spin Wheel</button>
-      <Pin></Pin>
+    <div className="choice-container">
       <div className="choice-spinner" ref={pieChartRef}></div>
+      <div className="controls-container">
+        <h1>ChoiceWheel</h1>
+        {time !== null && <h2>Time remaining: {time} seconds</h2>}
+        <button onClick={spinWheel}>Spin Wheel</button>
+        <Pin />
+      </div>
     </div>
   );
 };
