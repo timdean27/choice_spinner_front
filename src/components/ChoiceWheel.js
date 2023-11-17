@@ -17,22 +17,22 @@ const ChoiceSpinner = ({ choices }) => {
     // Remove existing pie chart
     d3.select(pieChartRef.current).selectAll("*").remove();
 
+    // Set up the SVG container
     const radius = Math.min(width, height) / 2;
-
     const svg = d3.select(pieChartRef.current).append("svg")
       .attr("width", width)
       .attr("height", height)
       .append("g")
       .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
-    const data = choices.map((choice) => choice.body.length);
-
+    // Prepare data and color scale
+    const data = Array.from({ length: choices.length }).fill(1);
     const colorScale = d3.scaleOrdinal()
       .domain(choices.map((choice) => choice.body))
       .range(d3.schemeCategory10);
 
+    // Create pie and arc functions
     const pie = d3.pie();
-
     const arc = d3.arc()
       .innerRadius(0)
       .outerRadius(radius);
@@ -113,12 +113,14 @@ const ChoiceSpinner = ({ choices }) => {
   };
 
   return (
-    <div>
-      <h1>ChoiceWheel</h1>
-      {time !== null && <h2>Time remaining: {time} seconds</h2>}
-      <button onClick={spinWheel}>Spin Wheel</button>
-      <Pin></Pin>
+    <div className="choice-container">
       <div className="choice-spinner" ref={pieChartRef}></div>
+      <div className="controls-container">
+        <h1>ChoiceWheel</h1>
+        {time !== null && <h2>Time remaining: {time} seconds</h2>}
+        <button onClick={spinWheel}>Spin Wheel</button>
+        <Pin />
+      </div>
     </div>
   );
 };
